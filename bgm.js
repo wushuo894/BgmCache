@@ -26,7 +26,7 @@ export let save = async (bgmId) => {
         return
     }
     console.log('https://api.bgm.tv/subject/' + bgmId);
-    let res = await fetch('https://api.bgm.tv/subject/' + bgmId)
+    let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId)
     let text = await res.text()
 
     const fs = await import('fs')
