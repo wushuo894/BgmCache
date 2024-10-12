@@ -27,6 +27,10 @@ export let save = async (bgmId) => {
     }
     console.log('https://api.bgm.tv/subject/' + bgmId);
     let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId)
+    if (res.status !== 200) {
+        return
+    }
+
     let text = await res.text()
 
     const fs = await import('fs')
@@ -37,16 +41,17 @@ export let save = async (bgmId) => {
             }
         })
     }
-    if (fs.existsSync(`bgm/${bgmId}.json`)) {
-        // fs.rmSync(`bgm/${bgmId}.json`)
+    let path = `bgm/${bgmId}.json`
+    if (fs.existsSync(path)) {
+        // fs.rmSync(path)
         return
     }
-    fs.writeFile(`bgm/${bgmId}.json`, text, (err) => {
+    fs.writeFile(path, text, (err) => {
         if (err) {
             console.error('Error saving the file:', err);
             return
         }
-        console.log(`bgm/${bgmId}.json saved`)
+        console.log(`${path} saved`)
     });
 }
 

@@ -26,7 +26,11 @@ for (let a of Array.from($('a'))) {
     mikan.push(href)
     await sleep(1000)
     let bgmId = await getBgmId(mikanHost + href)
-    await save(bgmId)
+    try {
+        await save(bgmId)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 function sleep(ms) {
