@@ -23,6 +23,9 @@ for (let a of Array.from($('a'))) {
     await sleep(1000)
     let bgmId = await getBgmId(mikanHost + href)
     await save(bgmId)
+
+    // 测试
+    return
 }
 
 function sleep(ms) {
