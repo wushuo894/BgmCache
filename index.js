@@ -29,7 +29,7 @@ for (let a of Array.from($('a'))) {
     await save(bgmId)
 
     // 测试
-    return
+    break
 }
 
 function sleep(ms) {
