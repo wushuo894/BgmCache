@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: run NodeJs
+      - name: Run NodeJs
         run: |
           npm install
           npm run start
