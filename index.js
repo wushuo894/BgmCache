@@ -6,7 +6,7 @@ const cheerio = await import('cheerio');
 let mikanHost = 'https://mikanani.me'
 let res = await fetch(mikanHost)
 let html = await res.text()
-
+let mikan = []
 const $ = cheerio.load(html);
 for (let a of Array.from($('a'))) {
     let href = a.attribs['href']
@@ -20,6 +20,10 @@ for (let a of Array.from($('a'))) {
     if (!href.match(regex)) {
         continue
     }
+    if (mikan.includes(href)) {
+        continue
+    }
+    mikan.push(href)
     await sleep(1000)
     let bgmId = await getBgmId(mikanHost + href)
     await save(bgmId)
