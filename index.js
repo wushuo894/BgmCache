@@ -4,7 +4,7 @@ import {getBgmId, save} from "./bgm.js";
 const cheerio = await import('cheerio');
 
 let mikanHost = 'https://mikanani.me'
-let res = await fetch(mikanHost)
+let res = await fetch(mikanHost + '/Home/BangumiCoverFlowByDayOfWeek?year=2024&seasonStr=春')
 let html = await res.text()
 let mikan = []
 const $ = cheerio.load(html);

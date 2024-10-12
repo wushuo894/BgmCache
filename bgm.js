@@ -25,6 +25,11 @@ export let save = async (bgmId) => {
     if (!bgmId) {
         return
     }
+    const fs = await import('fs')
+    let path = `bgm/${bgmId.substring(0, 1)}/${bgmId}.json`
+    if (fs.existsSync(path)) {
+        return
+    }
     console.log('https://api.bgm.tv/subject/' + bgmId);
     let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId)
     if (res.status !== 200) {
@@ -33,18 +38,12 @@ export let save = async (bgmId) => {
 
     let text = await res.text()
 
-    const fs = await import('fs')
     if (!fs.existsSync('bgm')) {
         fs.mkdir('bgm', (err) => {
             if (err) {
                 console.error('mkdir:', err);
             }
         })
-    }
-    let path = `bgm/${bgmId}.json`
-    if (fs.existsSync(path)) {
-        // fs.rmSync(path)
-        return
     }
     fs.writeFile(path, text, (err) => {
         if (err) {
