@@ -18,3 +18,4 @@ jobs:
           BRANCH: master
           FOLDER: bgm
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          TARGET_DIR: bgm
