@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: run NodeJs
-        run: |
-          npm install
-          npm run start
+#      - name: run NodeJs
+#        run: |
+#          npm install
+#          npm run start
       - name: Push to another repository
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
