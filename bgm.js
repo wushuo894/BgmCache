@@ -38,7 +38,8 @@ export let save = async (bgmId) => {
         })
     }
     if (fs.existsSync(`bgm/${bgmId}.json`)) {
-        fs.rmSync(`bgm/${bgmId}.json`)
+        // fs.rmSync(`bgm/${bgmId}.json`)
+        return
     }
     fs.writeFile(`bgm/${bgmId}.json`, text, (err) => {
         if (err) {
