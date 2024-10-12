@@ -30,6 +30,7 @@ export let save = async (bgmId) => {
     if (fs.existsSync(path)) {
         return
     }
+    await sleep(1000)
     console.log('https://api.bgm.tv/subject/' + bgmId);
     let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId)
     if (res.status !== 200) {
@@ -52,6 +53,10 @@ export let save = async (bgmId) => {
         }
         console.log(`${path} saved`)
     });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export default {getBgmId, save}
