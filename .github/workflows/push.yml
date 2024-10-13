@@ -3,7 +3,7 @@ name: Push to Another Repository
 on:
   workflow_dispatch:
   schedule:
-    - cron: "10 0 * * *" # UTC 时间
+    - cron: "15 0 * * *" # UTC 时间
 
 jobs:
   run_job:
