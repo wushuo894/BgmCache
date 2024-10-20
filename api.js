@@ -16,8 +16,9 @@ let put = async (url, body) => {
 
 let fetch_ = async (url, method, body) => {
     let headers = {}
-    if (authorization.value.length) {
-        headers['Authorization'] = authorization.value
+    let token = process.env.TOKEN
+    if (token) {
+        headers['Authorization'] = 'Bearer ' + token
     }
     return await fetch(url, {
         'method': method,
@@ -34,7 +35,5 @@ let fetch_ = async (url, method, body) => {
         })
 }
 
-let authorization = {value: ''}
-
-export default {post, get, del, put, authorization}
+export default {post, get, del, put}
 
