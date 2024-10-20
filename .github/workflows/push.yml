@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Run NodeJs
+        env:
+          TOKEN: ${{ secrets.BGM_TOKEN }}
         run: |
           npm install
           npm run start
