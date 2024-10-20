@@ -32,7 +32,12 @@ export let save = async (bgmId) => {
     }
     await sleep(1000)
     console.log('https://api.bgm.tv/subject/' + bgmId);
-    let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId)
+    let headers = {}
+    let token = process.env.TOKEN
+    if (token) {
+        headers['Authorization'] = 'Bearer ' + token
+    }
+    let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId,{headers})
     if (res.status !== 200) {
         return
     }
