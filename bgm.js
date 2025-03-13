@@ -42,18 +42,10 @@ export let save = async (bgmId) => {
     let text = await res.text()
 
     if (!fs.existsSync('bgm')) {
-        fs.mkdir('bgm', (err) => {
-            if (err) {
-                console.error('mkdir:', err);
-            }
-        })
+        fs.mkdirSync('bgm')
     }
     if (!fs.existsSync(`bgm/${bgmId.substring(0, 1)}`)) {
-        fs.mkdir(`bgm/${bgmId.substring(0, 1)}`, (err) => {
-            if (err) {
-                console.error('mkdir:', err);
-            }
-        })
+        fs.mkdirSync(`bgm/${bgmId.substring(0, 1)}`)
     }
     fs.writeFile(path, text, (err) => {
         if (err) {
