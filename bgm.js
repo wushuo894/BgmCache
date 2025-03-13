@@ -12,7 +12,7 @@ export let getBgmId = async (url) => {
         if (!href) {
             continue
         }
-        let regex = /^https:\/\/bgm.tv\/subject\/(\d+)(\/)?$/
+        let regex = /^https?:\/\/bgm.tv\/subject\/(\d+)(\/)?$/
         if (!href.match(regex)) {
             continue
         }
