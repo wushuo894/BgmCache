@@ -1,5 +1,5 @@
 import api from "./api.js";
-import {getBgmId, save} from "./bgm.js";
+import bgm from "./bgm.js";
 
 const cheerio = await import('cheerio');
 
@@ -29,9 +29,14 @@ for (let a of aList) {
         continue
     }
     mikan.push(href)
-    let bgmId = await getBgmId(mikanHost + href)
+    let bgmId = await bgm.getBgmId(mikanHost + href)
     try {
-        await save(bgmId)
+        let bangumiId = href.match(/\d+/g)[0]
+        let bgmInfo = await bgm.save(bgmId)
+        if (bgmInfo === undefined) {
+            continue
+        }
+        await bgm.saveScore(bangumiId, bgmInfo)
     } catch (err) {
         console.log(err)
     }

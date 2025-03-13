@@ -27,9 +27,6 @@ export let save = async (bgmId) => {
     }
     const fs = await import('fs')
     let path = `bgm/${bgmId.substring(0, 1)}/${bgmId}.json`
-    if (fs.existsSync(path)) {
-        return
-    }
     await sleep(1000)
     console.log('https://api.bgm.tv/subject/' + bgmId);
     let headers = {}
@@ -37,7 +34,7 @@ export let save = async (bgmId) => {
     if (token) {
         headers['Authorization'] = 'Bearer ' + token
     }
-    let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId,{headers})
+    let res = await fetch('https://api.bgm.tv/v0/subjects/' + bgmId, {headers})
     if (res.status !== 200) {
         return
     }
@@ -58,10 +55,26 @@ export let save = async (bgmId) => {
         }
         console.log(`${path} saved`)
     });
+    return JSON.parse(text);
+}
+
+/**
+ * 保存评分
+ * @param bangumiId
+ * @param bgmInfo
+ */
+let saveScore = async (bangumiId, bgmInfo) => {
+    let score = bgmInfo['rating']['score'];
+    let id = bgmInfo.id;
+
+    let fs = await import('fs')
+    let scores = JSON.parse(fs.readFileSync('bgm/score.json', 'utf8'))
+    scores[bangumiId] = score;
+    fs.writeFileSync('bgm/score.json', JSON.stringify(scores))
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export default {getBgmId, save}
+export default {getBgmId, save, saveScore}
