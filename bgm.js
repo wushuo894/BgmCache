@@ -48,6 +48,13 @@ export let save = async (bgmId) => {
             }
         })
     }
+    if (!fs.existsSync(`bgm/${bgmId.substring(0, 1)}`)) {
+        fs.mkdir(`bgm/${bgmId.substring(0, 1)}`, (err) => {
+            if (err) {
+                console.error('mkdir:', err);
+            }
+        })
+    }
     fs.writeFile(path, text, (err) => {
         if (err) {
             console.error('Error saving the file:', err);
@@ -65,8 +72,6 @@ export let save = async (bgmId) => {
  */
 let saveScore = async (bangumiId, bgmInfo) => {
     let score = bgmInfo['rating']['score'];
-    let id = bgmInfo.id;
-
     let fs = await import('fs')
     let scores = JSON.parse(fs.readFileSync('bgm/score.json', 'utf8'))
     scores[bangumiId] = score;
