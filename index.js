@@ -6,7 +6,6 @@ let mikanHost = 'https://mikanani.me'
 // mikanHost + '/Home/BangumiCoverFlowByDayOfWeek?year=2023&seasonStr=秋'
 let res = await fetch(mikanHost)
 let html = await res.text()
-let mikan = []
 const $ = cheerio.load(html);
 let aList = Array.from($('a'))
 
